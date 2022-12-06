@@ -107,3 +107,10 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+
+
+# portafolio_mike
+Portafolio de trabajo
+Creado en Svelte
+npm install
+npm run dev
