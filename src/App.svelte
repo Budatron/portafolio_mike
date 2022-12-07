@@ -4,6 +4,8 @@ import PreviewRow from "./components/PreviewRow.svelte";
 import { scrollto } from "svelte-scrollto";
 import * as animateScroll from "svelte-scrollto";
 import Project from "./Project.svelte";
+import { gsap } from "gsap";
+
 let showProject = false
 let projectDetail;
 let showMobileMenu = false
@@ -20,35 +22,114 @@ const handelLink = () => {
 const toggleMenu = () => {
 	showMobileMenu = !showMobileMenu
 }
+
+//const boxes = document.querySelectorAll('.w3-card-0');
+
+//for (const box of boxes) {
+//	box.addEventListener('mouseover', function (event) {console.log('ovverr');
+//		event.classList.add('hover');
+//	})
+//	box.addEventListener('mouseout', function (event) {console.log('noooover');
+//		event.classList.remove('hover');
+//	})
+//}
+
+
+
+//document.addEventListener('mousemove', function (event) {
+//	let xPos = (event.clientX/screen.width) - 0.5
+//	let yPos = (event.clientY/screen.height) - 0.5
+
+	//console.log(xPos, yPos);
+
+//	TweenLite.to(".w3-card-0", 0.6, {rotationY:35*xPos, rotationX:15*yPos, ease: Power1.easeOut, transformPerspective: 900, transformOrigin: 'center'})
+
+	//let bottom = document.querySelector('.bottom');
+	//bottom.text
+//})
+setTimeout(() => {
+	gsap.utils.toArray("#menu > li").forEach(el => {
+  // get just the nested <li> submenu items inside this one
+  let items = el.querySelectorAll("ul > li");
+  // if any are found, create the animation and mouseover/mouseout listeners
+  if (items.length > 0) {
+    let animation = gsap.fromTo(items, {opacity: 0, y: 20}, {
+        opacity: 1,
+        display: "block",
+        y: 0,
+        stagger: 0.08,
+        paused: true
+      });
+    el.addEventListener("mouseover", () => animation.play());
+    el.addEventListener("mouseout", () => animation.reverse());
+  }
+});
+}, 1000);
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("header-title").style.fontSize = "24px";
+	document.getElementById("header-title").style.marginTop = "20px";
+	document.getElementById("top-bar").style.boxShadow = "2px -1px 19px -3px rgba(24,84,173, 0.3)";
+	document.getElementById("bar").style.paddingTop = "0px";
+	//document.getElementById("bar").classList.add("scroll");
+  } else {
+	//document.getElementById("bar").classList.add("scroll");
+    document.getElementById("header-title").style.fontSize = "36px";
+	document.getElementById("header-title").style.marginTop = "0px";
+	document.getElementById("top-bar").style.boxShadow = "0px 0px 0px white";
+	document.getElementById("bar").style.paddingTop = "32px";
+  }
+}
+
 </script>
 <svelte.head>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">	 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&display=swap" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap' rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://unpkg.com/tilt.js@1.1.13/dest/tilt.jquery.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+	
+	
 </svelte.head>
 
-<main class="w3-theme-l5">
-	<div class="w3-container w3-top w3-card" style="left: 0; right: 0;">
-		<div class="w3-bar w3-theme-l5">
-			<div class="w3-bar-item">Miguel Martinez</div>
+<main class="">
+	<div id="top-bar" class="w3-container w3-top" style="left: 0; right: 0;">
+		<div id="bar" class="w3-bar w3-content">
+			<h1 id="header-title" class="w3-bar-item header-title">Miguel Martinez</h1>
+			<ul id="menu">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" on:click={toggleMenu} title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-			<a  on:click={handelLink} use:scrollto={"#who"} class="w3-bar-item w3-button w3-right w3-hide-small">About Me</a>
-			<a  on:click={handelLink} use:scrollto={"#what"} class="w3-bar-item w3-button w3-right w3-hide-small">My Services</a>
-			<a  on:click={handelLink} use:scrollto={"#games"} class="w3-bar-item w3-button w3-right w3-hide-small">Games</a>
-			<a  on:click={handelLink} use:scrollto={"#work"} class="w3-bar-item w3-button w3-right w3-hide-small">My Work</a>
-			<a on:click={handelLink} use:scrollto={"#home"} class="w3-bar-item w3-button w3-right w3-hide-small">Home</a>
+			<li><a on:click={handelLink} use:scrollto={"#home"} class="w3-bar-item w3-button w3-right w3-hide-small">Home</a></li>
+			
+			
+			<li><a  on:click={handelLink} use:scrollto={"#work"} class="w3-bar-item w3-button w3-right w3-hide-small">My Work</a>
+			<ul>
+				 
+				<li><a  on:click={handelLink} use:scrollto={"#work"} class="w3-bar-item w3-button w3-right w3-hide-small">Web</a></li>
+			 
+				<li><a  on:click={handelLink} use:scrollto={"#games"} class="w3-bar-item w3-button w3-right w3-hide-small">Games</a></li>
+
+				<li><a  on:click={handelLink} use:scrollto={"#games"} class="w3-bar-item w3-button w3-right w3-hide-small">Banners</a></li>
+			</ul>
+			</li>
+			<li><a  on:click={handelLink} use:scrollto={"#what"} class="w3-bar-item w3-button w3-right w3-hide-small">Resume</a></li>
+			<li><a  on:click={handelLink} use:scrollto={"#who"} class="w3-bar-item w3-button w3-right w3-hide-small">Contact</a></li>
 			<!-- <a use:scrollto={"#"} class="w3-bar-item w3-button w3-right">All Work</a> -->
-		  </div>
+		</ul>
+		</div>
 	</div>
 
 	<div id="navDemo" class="w3-top w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large" class:w3-show={showMobileMenu} style="margin-top: 50px;">
 		<a on:click={handelLink} use:scrollto={"#home"} class="w3-bar-item w3-button w3-right">Home</a>
 		<a  on:click={handelLink} use:scrollto={"#work"} class="w3-bar-item w3-button w3-right">My Work</a>
 		<a  on:click={handelLink} use:scrollto={"#games"} class="w3-bar-item w3-button w3-right">Games</a>
-		<a  on:click={handelLink} use:scrollto={"#what"} class="w3-bar-item w3-button w3-right">My Services</a>
+	<!---	<a  on:click={handelLink} use:scrollto={"#what"} class="w3-bar-item w3-button w3-right">My Services</a>-->
 		<a  on:click={handelLink} use:scrollto={"#who"} class="w3-bar-item w3-button w3-right">About Me</a>
 	</div>
 	
@@ -59,9 +140,9 @@ const toggleMenu = () => {
 	{:else}
 	<div out:fade id="home" class="w3-row-padding padding-64 w3-container" style="margin-top: 40px;">
 		<div class="w3-content">
-			<div class="w3-twothird">
-			<div class="w3-padding-16">😎 Hello, I’m Miguel!</div>
-			<h1 class="title">Front end developer with a passion for 
+			<div class="w3-half">
+			<h4 class="w3-padding-16 sub-header">Hi, I'm a Front End Developer | Casual Games / UX Animations 🖖</h4>
+			<!--<h1 class="title">Front end developer with a passion for 
 
 				<span>i</span>
 				<span>n</span>
@@ -87,8 +168,8 @@ const toggleMenu = () => {
 				<span>o</span>
 				<span>n</span>
 				<span>s</span>
-			</h1>
-			<h5 class="">Variety of services and solutions. Send me a message to contact and let me know your project.</h5>
+			</h1>-->
+			<!--<h5 class="">Variety of services and solutions. Send me a message to contact and let me know your project.</h5>-->
 			</div>
 		
 			<div class="w3-third w3-center">
@@ -101,7 +182,7 @@ const toggleMenu = () => {
 	<div class="w3-content line"></div>
 
 	<div id="work" class="padding-64 w3-container">
-		<div class="w3-content">
+		<div class="w3-content categories">
 			<h2>Recent Projects</h2>
 		</div>
 
@@ -291,7 +372,7 @@ const toggleMenu = () => {
 	<div class="w3-content line"></div>
 
 		<div id="games" class="padding-64 w3-container">
-			<div class="w3-content">
+			<div class="w3-content categories">
 				<h2>Games</h2>
 			</div>
 		<PreviewRow on:dipatchProject={handleClick} on:click={() => animateScroll.scrollToTop()}
@@ -466,10 +547,51 @@ const toggleMenu = () => {
 	></PreviewRow> -->
 	</div>
 	
+
+	<div class="w3-content line"></div>
+
+	<div id="who" class="padding-64 w3-container">
+		<div class="w3-content categories">
+			<div class="w3-twothird" style="padding-right:32px">
+				
+					<h2>Who I’am</h2>
+					<p>Hi, I'm Miguel Martinez. I'm a front-end developer with long experience developing websites and applications for various clients around the world.</p>
+					<p>I have a university degree in Mechatronics. However, I found my passion for programming and the web during the course of my career. Since then I have served different companies and projects as an employee and freelancer respectively.</p>
+					<!--<p>I enjoy creating interactive applications and solving complex problems.</p>
+
+					<p>Another thing you should know is that I love dogs.</p>-->
+					<h2>Get in touch</h2>
+					<p class="contact">
+						<a href="mailto:xamantechmail@gmail.com">xamantechmail@gmail.com <i class="fa fa-envelope" aria-hidden="true"></i></a>
+					</p>
+		
+				<!--<div class="w3-half" style="padding-right:16px">
+					<h3>Developer + Front-End</h3>
+				
+					<p>I'm a front end developer at heart, pure HTML, CSS, JavaScript. But my skills are not limited to that. I do many other things. I am interested in challenges. I am open to develop any kind of application if is in my domain. Lately doing FullStack with Svelte.</p>
+
+					<h3>Animatios + Interaction</h3>
+					<p>This is the part I like the most and I think it is essential because it brings life to any project making it intuitive and memorable. My job is to bring these animations to reality to create magical places.</p>
+
+					<h3>Games</h3>
+					<p>I love games, but I love programming them more. I have been doing it since I was a child. Focused on 2D casual games. I'd love to hear about the work you're doing. Check out the All Work section for related material. I'd love to hear about the work you're doing.</p>
+				</div>-->
+
+			</div>
+			<div class="w3-thirth" >
+				<div class="w3-padding-32">	
+					<img id="autor" style=" right: 0px; width:100%;max-width:200px" src="https://drive.google.com/uc?export=download&id=1QKwpj2WiTM-LR748PETGDp3FLYOVFhOG" class="w3-circle" alt="">
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+
 	<div class="w3-content line"></div>
 
 	<div id="what" class="padding-64 w3-container">
-		<div class="w3-content">
+		<div class="w3-content categories">
 			<h2>What I Do</h2>
 		</div>
 		
@@ -493,26 +615,6 @@ const toggleMenu = () => {
 		</div>
 	</div>
 
-	<div class="w3-content line"></div>
-
-	<div id="who" class="padding-64 w3-container">
-		<div class="w3-content">
-			<div class="w3-twothird">
-				<h2>Who I’am</h2>
-			<p>Hi, I'm Miguel Martinez. I'm a front-end developer with long experience developing websites and applications for various clients around the world.</p>
-			<p>I have a university degree in Mechatronics. However, I found my passion for programming and the web during the course of my career. Since then I have served different companies and projects as an employee and freelancer respectively.</p>
-			<p>I enjoy creating interactive applications and solving complex problems.</p>
-
-			<p>Another thing you should know is that I love dogs.</p>
-			</div>
-		</div>
-
-		<div class="w3-thirth" >
-			<div class="w3-padding-32">	
-				<img style=" right: 0px; width:100%;max-width:300px" src="https://drive.google.com/uc?export=download&id=1QKwpj2WiTM-LR748PETGDp3FLYOVFhOG" class="w3-circle" alt="">
-			</div>
-		</div>
-	</div>
 	
 
 	<div class="w3-content line"></div>
@@ -545,33 +647,164 @@ const toggleMenu = () => {
 			</a>
 		</div>
 	</div> -->
-	{/if}
+{/if}
+
 </main>
 
 <style>
- body,h1,h2,h3,h4,h5,h6 {
-	 font-family: Chivo, sans-serif !important;
+ main, h1, h2, h3, h4, h5, h6, p {
+	 font-family: 'Plus Jakarta Sans', sans-serif !important;
+	 color: #2B4061 !important;
 		/* margin: 0  !important; */
 	}
+
+.w3-top {
+	background-color: white;
+}
+
+#who {
+	margin-top: 64px;
+	background: rgb(139,179,237);
+background: linear-gradient(125deg, rgba(139,179,237,0.10407913165266103) 0%, rgba(15,109,249,0.24693627450980393) 100%);
+}
+
+#autor {
+	border: 10px solid #6FA8FD;
+	box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+        -webkit-box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+        -moz-box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+#menu {
+	float: right;
+}
+	ul{
+  list-style: none;
+}
+#menu li>a{
+  background-color: white;
+  color: #2B4061;
+  padding: 10px;
+  min-width: 100px;
+  display: block;
+  text-decoration: none;
+  border-radius: 10px;
+}
+#menu li>a:hover{
+  color: #237AFC !important;
+  background-color: #7aafff54 !important;
+}
+#menu>li{
+  float: left;
+  text-align: center;
+  width: 100px;
+  margin-left: 24px;
+}
+#menu>li>ul>li{
+  display: none;
+}
+
+#menu>li>ul>li>a{
+  background-color: #6fa8fd1e;
+  border-radius: 10px;
+}
+
+.contact {
+	margin: 32px auto 64px;
+	padding: 8px 0px;
+}
+.contact a{
+	position: relative;
+	background: rgb(89,153,250);
+	background: linear-gradient(90deg, rgba(89,153,250,1) 0%, rgba(34,119,246,1) 100%);
+	color: white;
+	padding: 16px 24px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 800;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+.contact a:hover{
+	box-shadow: 2px -1px 19px -3px rgba(24,84,173, 0.5);
+        -webkit-box-shadow: 2px -1px 19px -3px rgba(24,84,173, 0.5);
+        -moz-box-shadow: 2px -1px 19px -3px rgba(24,84,173, 0.5);
+		bottom: 5px;
+}
+
+.contact a i {
+	font-size: 24px;
+	margin-left: 10px;
+}
+
+h4 {
+	font-weight: 600;
+}
+
+
+.w3-content {
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+	color: #2B4061;
+}
+
+
+.w3-bar {
+	padding: 32px 0px 4px;
+	background-color: white;
+}
+
+.w3-bar .w3-button {
+	font-weight: 800;
+}
+
+#bar {
+	
+	transition: 0.4s padding-top;
+}
+
+.header-title {
+	/*font-size: 44px;*/
+	font-weight: 800;
+	padding: unset;
+	transition: 0.4s font-size;
+}
+
+#home {
+	margin-top: 70px !important;
+	margin-bottom: 60px;
+}
+
  .line {
 	 /* height: 1px; */
 	 /* background-color: grey; */
 	width: calc(100% - 30px);
-	border-top: #000 solid 0.5px;
+	border-top: #eee solid 0.5px;
  }
  h2 {
 	 font-weight: bold;
  }
  .fa-envelope,.fa-facebook {font-size:34px}
+
+ .categories {
+	margin: 32px auto;
+ }
+
  .title {
 	 font-weight: 900;
-	 font-family: Chivo;
+	 font-family:  'Plus Jakarta Sans', sans-serif !important;;
  }
- .w3-theme-l5 {color:#000 !important; background-color:#fefbf5 !important}
+ /* .w3-theme-l5 {color:#000 !important; background-color:#fefbf5 !important}
  .padding-64{
 	 padding-top: 40px;
 	 padding-bottom: 40px;
- }
+ } */
 
  h1 {
   /* cursor: default;
