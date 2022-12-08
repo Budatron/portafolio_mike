@@ -63,11 +63,11 @@
         imageEL,
         imageFL,
         urlL,
-        })}} class="w3-third preview" style="padding-right: 16px">
+        })}} class="w3-col l4 m6 s12 preview" style="padding-right: 16px">
         <div class="w3-card-0" data-tilt>
             <img src={imageL} alt="" style="width:100%">
             
-              <div class="">
+              <div class="card-text">
                 <h3>{titleL}</h3>
                 <p class="desc">{descL}</p>
                 <p class="more">Click to know more</p>
@@ -90,7 +90,7 @@
         imageEM,
         imageFM,
         urlM,
-        })}}  class="w3-third preview" style="padding: 0 8px">
+        })}}  class="w3-col l4 m6 s12 preview" style="padding: 0 8px">
         <div id="card-x" class="w3-card-0" data-tilt>
             <img src={imageM} alt="" style="width:100%">
            
@@ -117,7 +117,7 @@
         imageER,
         imageFR,
         urlR,
-        })}}   class="w3-third preview" style="padding-left: 16px">
+        })}}   class="w3-col l4 m6 s12 preview" style="padding-left: 16px">
         <div class="w3-card-0" data-tilt>
             <img src={imageR} alt="" style="width:100%">
            
@@ -188,4 +188,19 @@ background-image: radial-gradient(circle at bottom center, #277af610, #277af610 
         margin-top: 24px;
 	    font-weight: 800 !important;
     }
+  
+
+@media only screen and (min-width: 460px) {
+  .w3-col.l4 {
+    width: 49.99%;
+  }
+}
+
+@media only screen and (min-width: 790px) {
+  .w3-col.l4 {
+    width: 33.33%;
+  }
+}
+
+
 </style>

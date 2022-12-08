@@ -108,6 +108,8 @@
  h1, h2, h3 {
 	 font-weight: bold;
  }
-
+ #project {
+    margin-top: 30px;
+ }
  .fa-envelope,.fa-facebook {font-size:34px}
 </style>
