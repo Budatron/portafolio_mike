@@ -699,10 +699,10 @@ function scrollFunction() {
 
 					<p>Another thing you should know is that I love dogs.</p>-->
 					<h2>Get in touch</h2>
-					<p class="contact">
+				<!--	<p class="contact">
 						<a href="mailto:xamantechmail@gmail.com">xamantechmail@gmail.com <i class="fa fa-envelope" aria-hidden="true"></i></a>
 					</p>
-					
+					-->
 					
 				<!--<div class="w3-half" style="padding-right:16px">
 					<h3>Developer + Front-End</h3>
