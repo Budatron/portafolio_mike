@@ -105,17 +105,17 @@ window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-    document.getElementById("header-title").style.fontSize = "24px";
+    document.getElementById("header-title").style.fontSize = "22px";
 	document.getElementById("header-title").style.marginTop = "20px";
 	document.getElementById("top-bar").style.boxShadow = "2px -1px 19px -3px rgba(24,84,173, 0.3)";
 	document.getElementById("bar").style.paddingTop = "0px";
 	//document.getElementById("bar").classList.add("scroll");
   } else {
 	//document.getElementById("bar").classList.add("scroll");
-    document.getElementById("header-title").style.fontSize = "36px";
+    document.getElementById("header-title").style.fontSize = "26px";
 	document.getElementById("header-title").style.marginTop = "0px";
 	document.getElementById("top-bar").style.boxShadow = "none";
-	document.getElementById("bar").style.paddingTop = "32px";
+	document.getElementById("bar").style.paddingTop = "40px";
   }
 }
 
@@ -205,18 +205,9 @@ function scrollFunction() {
 	<div out:fade id="home" class="w3-row-padding padding-64 w3-container" style="margin-top: 40px;">
 		<div class="w3-content">
 			<div class="w3-half">
-			<h4 class="w3-padding-16 sub-header">Hi, I'm a Front End Developer <br>| Casual Games / UX  
-				<span>A</span>
-				<span>n</span>
-				<span>i</span>
-				<span>m</span>
-				<span>a</span>
-				<span>t</span>
-				<span>i</span>
-				<span>o</span>
-				<span>n</span>
-				<span>s</span>
-				🖖</h4>
+			<h2 class="w3-padding-16 sub-header">Front End Development <br>and
+				<br>Motion Animation</h2>
+				<h4>Freelance developer. I help companies and individuals to materialize their design and animation ideas improving their users experience.</h4>
 			<!--<h1 class="title">Front end developer with a passion for 
 
 				<span>i</span>
@@ -922,6 +913,11 @@ h4 {
 	font-weight: 600;
 }
 
+.sub-header {
+	font-weight: 800;
+	line-height: 120%;
+	font-size: 36px;
+}
 
 .w3-content {
 	font-family: 'Plus Jakarta Sans', sans-serif !important;
@@ -1000,7 +996,7 @@ h4 {
   text-align: center; */
 }
 
-h4 span {
+/* h4 span {
   position: relative;
   top: 0px;
   display: inline-block;
@@ -1046,7 +1042,7 @@ h4 span:nth-child(10) {
 
 h4 span:nth-child(11) {
   -webkit-animation-delay: 1.0s;
-}
+} */
 
 /* h1 span:nth-child(12) {
   -webkit-animation-delay: 1.1s;
